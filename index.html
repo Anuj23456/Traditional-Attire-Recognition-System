@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional Dress Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-top: 30px;
+        }
+
+        form {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        img {
+            max-width: 80%;
+            max-height: 400px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .prediction {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .about {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 600px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload an Image for Prediction</h2>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if message %}
+    <p style="color: red;">{{ message }}</p>
+{% endif %}
+
+
+    {% if image_url %}
+    <div class="image-container">
+        <img src="{{ image_url }}" alt="Uploaded Image">
+        <div class="prediction">
+            <strong>Predicted Category:</strong> {{ predicted_category }}
+        </div>
+        {% if about_text %}
+        <div class="about">
+            {{ about_text|safe }}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>
